@@ -181,17 +181,33 @@
                   <div id="reportsChart"></div>
 
                   <script>
+                    var data = <?php echo json_encode($chart_data); ?>;
+                    
+                    var chart_data = {
+                      categories: [],
+                      evaluasi_scores: [],
+                      recall_scores: [],
+                      formatif_scores: []
+                    };
+
+                    for (var i = 0; i < data.length; i++) {
+                      chart_data.categories.push(data[i].nama_akun);
+                      chart_data.evaluasi_scores.push(parseFloat(data[i].evaluasi_score));
+                      chart_data.recall_scores.push(parseFloat(data[i].recall_score));
+                      chart_data.formatif_scores.push(parseFloat(data[i].formatif_score));
+                    }
+
                     document.addEventListener("DOMContentLoaded", () => {
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
+                          name: 'Evaluasi Score',
+                          data: chart_data.evaluasi_scores
                         }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
+                          name: 'Recall Score',
+                          data: chart_data.recall_scores
                         }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
+                          name: 'Formatif Score',
+                          data: chart_data.formatif_scores
                         }],
                         chart: {
                           height: 350,
@@ -221,8 +237,7 @@
                           width: 2
                         },
                         xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                          categories: chart_data.categories
                         },
                         tooltip: {
                           x: {

@@ -151,5 +151,20 @@ class Model_Siswa extends CI_Model
         return $query->result();
     }
 
+    public function getChartData($nis_nip) {
+        $query = $this->db->select('tb_akun.nama_akun, tb_hasil_evaluasi.skor_total as evaluasi_score, tb_hasil_recall.skor_total as recall_score, tb_hasil_formatif.skor_total as formatif_score')
+            ->from('tb_akun')
+            ->join('tb_hasil_evaluasi', 'tb_akun.nis_nip = tb_hasil_evaluasi.nis_nip')
+            ->join('tb_evaluasi_materi', 'tb_evaluasi_materi.id_evaluasi = tb_hasil_evaluasi.id_evaluasi')
+            ->join('tb_hasil_recall', 'tb_akun.nis_nip = tb_hasil_recall.nis_nip')
+            ->join('tb_recall', 'tb_recall.id_recall = tb_hasil_recall.id_recall')
+            ->join('tb_hasil_formatif', 'tb_akun.nis_nip = tb_hasil_formatif.nis_nip')
+            ->join('tb_formatif', 'tb_formatif.id_formatif = tb_hasil_formatif.id_formatif')
+            ->where('tb_akun.nis_nip', $nis_nip)
+            ->get();
+
+        return $query->result();
+    }
+
 }
 ?>

@@ -16,7 +16,10 @@ class Siswa extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('view_siswa_home');
+		$nis_nip	= $this->session->userdata('nis_nip');
+		$data['chart_data']=$this->Model_Siswa->getChartData($nis_nip);
+        
+		$this->load->view('view_siswa_home', $data);
 	}
 
 	public function profil_dev(){
