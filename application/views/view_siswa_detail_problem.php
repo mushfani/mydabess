@@ -3,7 +3,7 @@
 <?php include 'master/navbar_siswa.php'; ?>
 
     <div class="pagetitle">
-        <h1>Daftar Soal (Ini manggil nama problem) </h1>
+        <h1>Daftar Soal Problem </h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Home</li>
@@ -18,6 +18,14 @@
         <div class="card info-card customers-card">
             <div class="card-body">
                 <h5 class="card-title">Kerjakan soal dengan benar dan teliti!</h5>
+                <?php if ($this->session->flashdata('message_success')): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= $this->session->flashdata('message_success') ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                <?php endif; ?>
                 <div class="d-flex align-items-center">
                     <div class="ps-3">
                         <form method="post" action="<?php echo base_url(). 'siswa/check_jawaban_problem/' .  $datasoal->id_soal ?>">   

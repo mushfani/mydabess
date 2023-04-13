@@ -216,7 +216,7 @@ class Guru extends CI_Controller {
 		$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_formatif_materi();
 		$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
 		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords7();
-		$dataevaluasi['$datasiswa']=$this->Model_Guru->join_formatif_siswa();
+		$dataevaluasi['datasiswa']=$this->Model_Guru->join_formatif_siswa();
 		$this->load->view('view_guru_getall_formatif', $dataevaluasi);
 	}
 
@@ -232,8 +232,16 @@ class Guru extends CI_Controller {
 		$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_lkpd_materi();
 		$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
 		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords9();
-		$dataevaluasi['$datasiswa']=$this->Model_Guru->join_lkpd_siswa();
+		$dataevaluasi['datasiswa']=$this->Model_Guru->join_lkpd_siswa();
 		$this->load->view('view_guru_getall_lkpd', $dataevaluasi);
+	}
+
+	public function getAll_hasil_problem(){
+		$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_problem_materi();
+		$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
+		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords11();
+		$dataevaluasi['datasiswa']=$this->Model_Guru->join_problem_siswa();
+		$this->load->view('view_guru_getall_problem', $dataevaluasi);
 	}
 
 	public function detail_getall_lkpd($id_lkpd){

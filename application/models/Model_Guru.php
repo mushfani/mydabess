@@ -320,6 +320,15 @@ class Model_Guru extends CI_Model
         return $query->result();
     }
 
+    public function join_problem_siswa() {
+        $this->db->select('tb_akun.nis_nip, tb_akun.nama_akun');
+        $this->db->from('tb_jawaban_problem_siswa');
+        $this->db->join('tb_akun','tb_akun.nis_nip = tb_jawaban_problem_siswa.nis_nip');
+        $this->db->order_by('nama_akun',  'ASC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function join_lkpd_siswa() {
         $this->db->select('tb_akun.nis_nip, tb_akun.nama_akun');
         $this->db->from('tb_jawaban_siswa_lkpd');

@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card-body">
               <h5 class="card-title">Rekap Pembelajaran</h5>
-              <p>Ini adalah daftar rekap pembelajaran yang telah anda selesaikan</p>
+              <p>Ini adalah daftar nilai rekap pembelajaran yang telah anda selesaikan</p>
             
               <?php if ($this->session->flashdata('ver') == 'FALSE') { ?>
                 <div class="alert alert-<?=$this->session->flashdata("class_alert");?> alert-dismissible" role="alert">
@@ -29,17 +29,17 @@
                 </div>
               <?php } ?> 
 
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="card">
+              <div class="row match-height">
+                <div class="col-sm-6 d-flex">
+                  <div class="card h-90 w-100">
                     <div class="card-body">
                       <h5 class="card-title">Hasil Recall</h5>
                       <!-- Default Table -->
-                      <table class="table">
+                      <table class="table datatable">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama Test Recall Kuis</th>
+                            <th scope="col">Nama Recall Kuis</th>
                             <th scope="col">Skor</th>
                           </tr>
                         </thead>
@@ -58,28 +58,28 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="card">
+                <div class="col-sm-6 d-flex">
+                  <div class="card h-90 w-100">
                     <div class="card-body">
                       <h5 class="card-title">Hasil Problem</h5>
                       <!-- Default Table -->
-                      <table class="table">
+                      <table class="table datatable">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama Materi Problem</th>
-                            <th scope="col">Skor</th>
-                            <th scope="col">Time</th>
+                            <th scope="col">Nama Problem</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Try</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php $i = 1;
-                            foreach ($dataku as $d) :?> 
+                            foreach ($dataku2 as $d) :?> 
                               <tr>
                                   <td><?=$i++ ?></td>
-                                  <td><?=$d->nama_recall?></td>
-                                  <td><?=$d->skor_total?></td>
-                                  <td># </td>
+                                  <td><?=$d->nama_problem?></td>
+                                  <td><?=$d->score?></td>
+                                  <td><?=$d->retry?></td>
                               </tr>
                           <?php endforeach; ?>
                         </tbody>
@@ -88,16 +88,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="card">
+                <div class="col-sm-6 d-flex">
+                  <div class="card h-90 w-100">
                     <div class="card-body">
                       <h5 class="card-title">Hasil Formatif</h5>
                       <!-- Default Table -->
-                      <table class="table">
+                      <table class="table datatable">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama Test Formatif</th>
+                            <th scope="col">Nama Formatif</th>
                             <th scope="col">Skor</th>
                           </tr>
                         </thead>
@@ -116,16 +116,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="card">
+                <div class="col-sm-6 d-flex">
+                  <div class="card h-90 w-100">
                     <div class="card-body">
                       <h5 class="card-title">Hasil Evaluasi</h5>
                       <!-- Default Table -->
-                      <table class="table">
+                      <table class="table datatable">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama Test Evaluasi</th>
+                            <th scope="col">Nama Evaluasi</th>
                             <th scope="col">Skor</th>
                           </tr>
                         </thead>

@@ -107,6 +107,11 @@
             </a>
           </li>
           <li>
+            <a href="<?php echo base_url() ?>guru/getAll_hasil_problem">
+              <i class="bi bi-circle"></i><span>Hasil Problem</span>
+            </a>
+          </li>
+          <li>
             <a href="<?php echo base_url() ?>guru/getAll_hasil_lkpd">
               <i class="bi bi-circle"></i><span>Hasil LKPD</span>
             </a>

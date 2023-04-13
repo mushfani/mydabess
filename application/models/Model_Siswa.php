@@ -124,6 +124,17 @@ class Model_Siswa extends CI_Model
     //     return $query->result();
     // }
 
+    public function tampil_nilai_problem_byId(){
+        $this->db->select('tb_jawaban_problem_siswa.id_soal, tb_jawaban_problem_siswa.score,
+        tb_jawaban_problem_siswa.retry, tb_soal_problem.id_problem, tb_soal_problem.id_soal,
+        tb_problem.id_problem, tb_problem.nama_problem')->where("tb_jawaban_problem_siswa.nis_nip", $this->session->userdata('nis_nip'));
+        $this->db->from('tb_jawaban_problem_siswa');
+        $this->db->join('tb_soal_problem', 'tb_soal_problem.id_soal=tb_jawaban_problem_siswa.id_soal');
+        $this->db->join('tb_problem', 'tb_problem.id_problem=tb_soal_problem.id_problem');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function tampil_nilai_formatif_byId(){
         $this->db->select('tb_formatif.id_formatif, tb_formatif.nama_formatif, tb_hasil_formatif.id_formatif, 
         tb_hasil_formatif.skor_total')->where("tb_hasil_formatif.nis_nip", $this->session->userdata('nis_nip'));

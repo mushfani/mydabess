@@ -309,7 +309,7 @@ class Siswa extends CI_Controller {
 
 	public function rekap(){
 		$data['dataku']=$this->Model_Siswa->tampil_nilai_recall_byId();
-		//$data['dataku2']=$this->Model_Siswa->tampil_nilai_problem_byId();
+		$data['dataku2']=$this->Model_Siswa->tampil_nilai_problem_byId();
 		$data['dataku3']=$this->Model_Siswa->tampil_nilai_formatif_byId();
 		$data['dataku4']=$this->Model_Siswa->tampil_nilai_evaluasi_byId();
 		$this->load->view('view_siswa_rekap_pertemuan', $data);
@@ -451,6 +451,7 @@ class Siswa extends CI_Controller {
 					'end' => date('Y-m-d H:i:s')
 					//'end' => date('Y-m-d H:i:s')
 				]);
+				$this->session->set_flashdata('message_success', 'Anda Telah Berhasil Mengerjakan Problem Pertemuan Ini! ');
 				redirect('/siswa/problem');
 			} else {
 				$posisi = $soalProblem->id_soal;
@@ -458,6 +459,7 @@ class Siswa extends CI_Controller {
 				$problem = $this->Model_Guru->getPosisiJawaban($nextPosisi);
 				$id_problem = $problem->id_problem;
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
+				$this->session->set_flashdata('message_success', 'Jawaban Anda Benar! Kerjakan Problem Selanjutnya! ');
 				redirect('/siswa/detail_problem/' . $id_problem . '/' . $materi->kode_materi);
 			}
 		} else {
@@ -474,6 +476,7 @@ class Siswa extends CI_Controller {
 				);
 				$this->Model_Guru->create_jawaban_siswa($data);
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
+				$this->session->set_flashdata('message_success', 'Jawaban Anda Masih Belum Benar! ');
 				redirect('/siswa/detail_problem/' . $id_problem . '/' . $materi->kode_materi);
 			}
 			else{
@@ -492,6 +495,7 @@ class Siswa extends CI_Controller {
 				$this->Model_Guru->update_jawaban_siswa($cekGetRetry->id_jawaban_siswa, $data);
 
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
+				$this->session->set_flashdata('message_success', 'Jawaban Anda Masih Belum Benar! ');
 				redirect('/siswa/detail_problem/' . $id_problem . '/' . $materi->kode_materi);
 			}
 			// jika jawabannya salah
