@@ -23,10 +23,8 @@
                             <h2> Mushfani Ainul Urwah</h2>
                             <h3> Computer Science Of Education UPI </h3>
                             <div class="social-links mt-2">
-                                <a href="<?= base_url(); ?>/https://twitter.com/loveilovemetoo" class="twitter"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                <a href=" https://twitter.com/loveilovemetoo" class="twitter"><i class="bi bi-twitter"></i></a>
+                                <a href=" https://instagram.com/loveilovemetoo"><i class="bi bi-instagram"></i></a>
                             </div>
                         </div>
                     </div>

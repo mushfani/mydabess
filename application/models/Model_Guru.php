@@ -90,11 +90,25 @@ class Model_Guru extends CI_Model
         return $query->row();
     }
 
+    public function getRecords10ByIdSoalNis($id_soal, $nis_nip){
+        $this->db->select("*");
+        $this->db->where("id_soal",$id_soal);
+        $this->db->where("nis_nip",$nis_nip);
+        $query = $this->db->get('tb_jawaban_siswa_lkpd');
+        return $query->row();
+    }
+
     public function getRecords11(){
         $this->db->order_by('kode_materi', 'ASC');
         $query = $this->db->get('tb_problem');
         return $query->result();
     }
+
+    public function tampilsoallogthink()
+	{
+		$query = $this->db->get('tb_test_lt_soal');
+        return $query->result();
+	}
 
     public function tampilsoalpretest()
 	{
@@ -533,8 +547,9 @@ class Model_Guru extends CI_Model
         $this->db->update("tb_jawaban_siswa_lkpd",$data);
     }
 
-    function edit_skor_lkpd($id_soal, $data){
+    function edit_skor_lkpd($id_soal, $nis_nip, $data){
         $this->db->where("id_soal",$id_soal);
+        $this->db->where("nis_nip",$nis_nip);
         $this->db->update("tb_jawaban_siswa_lkpd",$data);
     }
 
@@ -634,6 +649,14 @@ class Model_Guru extends CI_Model
         $this->db->where("id_soal", $id_soal);
         $this->db->where("nis_nip", $nis_nip);
         $this->db->where("score != 0");
+        $data = $this->db->get("tb_jawaban_problem_siswa")->num_rows();
+        return $data;
+    }
+
+    public function getJawabanSiswaByNisdanIdSoal2($id_soal, $nis_nip){
+        $this->db->select("*");
+        $this->db->where("id_soal", $id_soal-1);
+        $this->db->where("nis_nip", $nis_nip);
         $data = $this->db->get("tb_jawaban_problem_siswa")->num_rows();
         return $data;
     }

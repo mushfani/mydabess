@@ -64,12 +64,12 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="<?php echo base_url() ?>siswa/pretest_lt">
               <i class="bi bi-circle"></i><span>Pretest Logical Thinking</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="<?php echo base_url() ?>siswa/postest_lt">
               <i class="bi bi-circle"></i><span>Posttest Logical Thinking</span>
             </a>
           </li>

@@ -24,6 +24,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th>Id</th>
                     <th scope="col">Soal </th>
                     <th scope="col">Jawaban </th>
                     <th scope="col">Skor</th>
@@ -35,6 +36,7 @@
                   foreach ($datasiswa as $d) :?> 
                     <tr>
                         <td><?=$i++ ?></td>
+                        <td><?=$d->nis_nip?></td>
                         <td><?=$d->soal ?></td>
                         <td><?=$d->jawaban ?></td>
                         <td><?=$d->skor ?></td>

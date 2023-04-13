@@ -19,6 +19,15 @@
             <div class="card-body">
               <h5 class="card-title">Task Formatif</h5>
               <p>Ini adalah daftar task formatif yang harus anda selesaikan dalam pembelajaran!</p>
+
+              <?php if ($this->session->flashdata('message_success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <?= $this->session->flashdata('message_success') ?>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <?php endif; ?>
               
               <?php if ($this->session->flashdata('ver') == 'FALSE') { ?>
                 <div class="alert alert-<?=$this->session->flashdata("class_alert");?> alert-dismissible" role="alert">

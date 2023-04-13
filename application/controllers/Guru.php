@@ -1082,8 +1082,8 @@ class Guru extends CI_Controller {
 		// redirect($_SERVER['HTTP_REFERER']);
 	}
 
-	public function edit_skor_lkpd($id_soal){
-		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords10ByIdSoal($id_soal);
+	public function edit_skor_lkpd($id_soal,$nis_nip){
+		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords10ByIdSoalNis($id_soal, $nis_nip);
 		$dataevaluasi['datasiswa']=$this->Model_Guru->join_jawaban_siswa_byIdDistinc($id_soal);
 		$this->load->view('view_guru_edit_skor_lkpd', $dataevaluasi);
 
@@ -1103,7 +1103,7 @@ class Guru extends CI_Controller {
 				'skor'	 => $this->input->post('skor')
 			);
 
-			$this->Model_Guru->edit_skor_lkpd($id_soal, $data);
+			$this->Model_Guru->edit_skor_lkpd($id_soal, $nis_nip, $data);
 			$this->session->set_flashdata('ver', 'FALSE');
             $this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
 

@@ -72,7 +72,23 @@
                             <button type="submit" class="btn btn-warning"> Prev </button>
                         </div> -->
                         <div class="col-sm-4">
-                            <button type="submit" class="btn btn-primary" <?php echo $cek > 0 ? 'disabled' : '' ?> onclick="return confirm ('Apakah Anda Yakin Akan Submit Kuis ini ?')"> Submit </button>
+                            <button type="submit" class="btn btn-primary" 
+                                <?php 
+                                    if ($cek > 0 ) { 
+                                        echo 'disabled';
+                                    } 
+                                    if ($cek3 == TRUE) { 
+                                        if ($datasoal->id_soal != 1) {
+                                            if ($cek2 <= 0) {
+                                                echo "disabled";
+                                            }
+                                        }
+                                    } else {
+                                        if ($cek2 <= 0) {
+                                            echo "disabled";
+                                        }
+                                    }
+                                ?> onclick="return confirm ('Apakah Anda Yakin Akan Submit Kuis ini ?')"> Submit </button>
                         </div>
                         <!-- <div class="col-sm-4">
                             <button type="submit" class="btn btn-success"> Next </button>

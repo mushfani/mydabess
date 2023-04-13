@@ -84,6 +84,7 @@ class Siswa extends CI_Controller {
 			$datasoalevaluasi['idrecall'] = $id_recall;
 			$this->load->view('view_siswa_detail_recall', $datasoalevaluasi);
 		} else{
+			$this->session->set_flashdata('message_success', 'Anda sudah mengerjakan test ini!');	
 			redirect('siswa/recall');
 		}
 		
@@ -106,6 +107,7 @@ class Siswa extends CI_Controller {
 			$datasoalevaluasi['idformatif'] = $id_formatif;
 			$this->load->view('view_siswa_detail_formatif', $datasoalevaluasi);
 		} else{
+			$this->session->set_flashdata('message_success', 'Anda sudah mengerjakan test ini!');	
 			redirect('siswa/formatif');
 		}
 	}
@@ -129,7 +131,10 @@ class Siswa extends CI_Controller {
 			'skor_total' => $score
 		);
 
-		$this->Model_Siswa->tambahdata_nilai_formatif($data);		
+		$this->Model_Siswa->tambahdata_nilai_formatif($data);	
+		$eval = $this->Model_Siswa->ambil_skor_formatif($id_formatif);
+		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan Test Recall Dengan Skor ' . $eval->skor_total. '!');	
+				
 		redirect('siswa/formatif');
 
 	}
@@ -150,6 +155,7 @@ class Siswa extends CI_Controller {
 			$datasoalevaluasi['idevaluasi'] = $id_evaluasi;
 			$this->load->view('view_siswa_detail_evaluasi', $datasoalevaluasi);
 		} else{
+			$this->session->set_flashdata('message_success', 'Anda sudah mengerjakan test ini!');	
 			redirect('siswa/evaluasi');
 		}
 	}
@@ -173,7 +179,10 @@ class Siswa extends CI_Controller {
 			'skor_total' => $score
 		);
 
-		$this->Model_Siswa->tambahdata_nilai_evaluasi($data);	
+		$this->Model_Siswa->tambahdata_nilai_evaluasi($data);
+		$eval = $this->Model_Siswa->ambil_skor_eval($id_evaluasi);
+		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan Test Recall Dengan Skor ' . $eval->skor_total. '!');	
+			
 		redirect('siswa/evaluasi');
 
 	}
@@ -198,7 +207,7 @@ class Siswa extends CI_Controller {
 		);
 
 		$this->Model_Siswa->tambahdata_nilai_recall($data);
-		$recall = $this->Model_Siswa->ambil_skor_recall($id_recall,$this->session->userdata('nis_nip') );
+		$recall = $this->Model_Siswa->ambil_skor_recall($id_recall);
 		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan Test Recall Dengan Skor ' . $recall->skor_total. '!');	
 		redirect('/siswa/recall');
 	}
@@ -327,12 +336,30 @@ class Siswa extends CI_Controller {
 		$this->load->view('view_siswa_posttest_basdat', $datasoalevaluasi);
 	}
 
+	public function pretest_lt(){
+		
+		$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoallogthink();
+		//$datasoalevaluasi['idpretest'] = $id;
+		$this->load->view('view_siswa_pretest_lt', $datasoalevaluasi );
+
+	}
+
+	public function postest_lt(){
+		
+		$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoallogthink();
+		//$datasoalevaluasi['idpretest'] = $id;
+		$this->load->view('view_siswa_posttest_lt', $datasoalevaluasi );
+
+	}
+
 
 	public function detail_problem($id_problem, $kode_materi){
 		$nis_nip = $this->session->userdata('nis_nip');
 		$cek = $this->Model_Guru->getSoalByIdProblem($id_problem);
 
 		$hasSession = $this->Model_Guru->hasSession($kode_materi, $nis_nip);
+
+		// $dataJawaban = $this->db->get('tb_jawaban_problem_siswa');
 
 		if (!$hasSession) {
 			$this->Model_Guru->createSession([
@@ -343,6 +370,14 @@ class Siswa extends CI_Controller {
 		}
 
 		$datasoalevaluasi['cek'] = $this->Model_Guru->getJawabanSiswaByNisdanIdSoal($cek->id_soal, $nis_nip);
+		$datasoalevaluasi['cek2'] = $this->Model_Guru->getJawabanSiswaByNisdanIdSoal2($cek->id_soal, $nis_nip);
+		$idSoal = $cek->id_soal;
+		if ($idSoal-1 == 0) {
+			$datasoalevaluasi['cek3'] = TRUE;
+		} else {
+			$datasoalevaluasi['cek3'] = FALSE;
+		}
+
 		$datasoalevaluasi['datasoal']=$this->Model_Guru->tampilproblem_by_id($id_problem);
 		//$datasoalevaluasi['datamateri']=$this->Model_Guru->join_problem_materi();
 		//$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoalrecall_by_id($id_recall);
@@ -402,12 +437,19 @@ class Siswa extends CI_Controller {
 				$kode_materi = $materi->kode_materi;
 
 				// $getStartEnd = $this->Model_Guru->getDurasi($kode_materi);
-				// $waktuStart = $getStartEnd->start;
-				// $waktuEnd = $getStartEnd->end;
-				// $realtime = $waktuEnd-$waktuStart;
+				// // $waktuStart = $getStartEnd->start;
+				// // $waktuEnd = $getStartEnd->end;
+				// // $realtime = $waktuEnd-$waktuStart;
 
+				// $datetime1 = strtotime($getStartEnd->start);
+				// $datetime2 = date('Y-m-d H:is');
+				// //$end = date('Y-m-d H:is')
+
+				// $secs = $datetime2 - $datetime1;
+				// $days = $secs / 86400;
 				$this->Model_Guru->updateSession($kode_materi, $nis_nip, [
 					'end' => date('Y-m-d H:i:s')
+					//'end' => date('Y-m-d H:i:s')
 				]);
 				redirect('/siswa/problem');
 			} else {

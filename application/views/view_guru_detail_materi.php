@@ -35,21 +35,6 @@
               </div>
             </div><!-- End Panduan Card -->
 
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
-                <div class="card info-card customers-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Video <span>| Apersepsi</span></h5>
-
-                        <div class="d-flex align-items-center">
-                            <div class="ps-3">
-                                Sebelum kamu memulai pembelajaran, yuk simak video apersespsi berikut!
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $datamateri->video_apersepsi ?>" frameborder="0" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Panduan Card -->
 
             <!-- Panduan Card -->
             <div class="col-xxl-4 col-xl-12">

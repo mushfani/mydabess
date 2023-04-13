@@ -88,10 +88,28 @@ class Model_Siswa extends CI_Model
         return $query->result();
     }
 
-    public function ambil_skor_recall($id_recall, $nis_nip) {
-        return $this->db->where("id_recall", $id_recall, "nis_nip", $nis_nip)
-                    ->from('tb_hasil_recall')
-                    ->get()->row();
+    public function ambil_skor_recall($id_recall) {
+        $this->db->select("*");
+		$this->db->where("id_recall", $id_recall);
+        $this->db->where("nis_nip", $this->session->userdata('nis_nip'));
+		$data = $this->db->get("tb_hasil_recall")->row();
+		return $data;
+    }
+
+    public function ambil_skor_eval($id_evaluasi) {
+        $this->db->select("*");
+		$this->db->where("id_evaluasi", $id_evaluasi);
+        $this->db->where("nis_nip", $this->session->userdata('nis_nip'));
+		$data = $this->db->get("tb_hasil_evaluasi")->row();
+		return $data;
+    }
+
+    public function ambil_skor_formatif($id_formatif) {
+        $this->db->select("*");
+		$this->db->where("id_formatif", $id_formatif);
+        $this->db->where("nis_nip", $this->session->userdata('nis_nip'));
+		$data = $this->db->get("tb_hasil_formatif")->row();
+		return $data;
     }
 
     // public function tampil_nilai_problem_byId(){
