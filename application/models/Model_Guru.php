@@ -104,6 +104,13 @@ class Model_Guru extends CI_Model
         return $query->result();
     }
 
+    public function getRecords11ByIdProblem($id_problem){
+        $this->db->select("*");
+        $this->db->where("$id_problem",$id_problem);
+        $query = $this->db->get('tb_problem');
+        return $query->row();
+    }
+
     public function tampilsoallogthink()
 	{
 		$query = $this->db->get('tb_test_lt_soal');
@@ -367,6 +374,19 @@ class Model_Guru extends CI_Model
         $this->db->from('tb_jawaban_siswa_lkpd');
         $this->db->join('tb_akun','tb_akun.nis_nip = tb_jawaban_siswa_lkpd.nis_nip');
         $this->db->where('tb_jawaban_siswa_lkpd.id_lkpd', $id_lkpd);
+        $this->db->group_by('nis_nip');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function join_problem_siswa_byIdDistinc($id_problem) {
+        $this->db->distinct();
+        $this->db->select('tb_akun.nis_nip, tb_akun.nama_akun, tb_jawaban_problem_siswa.id_soal, 
+        tb_jawaban_problem_siswa.score, tb_jawaban_problem_siswa.retry, tb_soal_problem.id_soal');
+        $this->db->from('tb_jawaban_problem_siswa');
+        $this->db->join('tb_akun','tb_akun.nis_nip = tb_jawaban_problem_siswa.nis_nip');
+        $this->db->join('tb_soal_problem','tb_soal_problem.id_soal= tb_jawaban_problem_siswa.id_soal');
+        $this->db->where('tb_soal_problem.id_problem', $id_problem);
         $this->db->group_by('nis_nip');
         $query = $this->db->get();
         return $query->result();

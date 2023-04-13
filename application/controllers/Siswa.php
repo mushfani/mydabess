@@ -18,6 +18,9 @@ class Siswa extends CI_Controller {
 	{
 		$nis_nip	= $this->session->userdata('nis_nip');
 		$data['chart_data']=$this->Model_Siswa->getChartData($nis_nip);
+		$data['dataku']=$this->Model_Siswa->tampil_nilai_recall_limit();
+		$data['dataku2']=$this->Model_Siswa->tampil_nilai_formatif_limit();
+		$data['dataku3']=$this->Model_Siswa->tampil_nilai_evaluasi_limit();
         
 		$this->load->view('view_siswa_home', $data);
 	}
@@ -307,7 +310,11 @@ class Siswa extends CI_Controller {
 	}
 
 	public function grafik(){
-		$this->load->view('view_siswa_grafik');
+		$nis_nip	= $this->session->userdata('nis_nip');
+		$data['chart_data']=$this->Model_Siswa->getChartData2($nis_nip);
+		// $data=$this->Model_Siswa->getChartData($nis_nip);
+
+		$this->load->view('view_siswa_grafik', $data);
 	}
 
 	public function rekap(){
@@ -439,22 +446,21 @@ class Siswa extends CI_Controller {
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
 				$kode_materi = $materi->kode_materi;
 
-				// $getStartEnd = $this->Model_Guru->getDurasi($kode_materi);
-				// // $waktuStart = $getStartEnd->start;
-				// // $waktuEnd = $getStartEnd->end;
-				// // $realtime = $waktuEnd-$waktuStart;
+				$getStartEnd = $this->Model_Guru->getDurasi($kode_materi);
 
-				// $datetime1 = strtotime($getStartEnd->start);
-				// $datetime2 = date('Y-m-d H:is');
-				// //$end = date('Y-m-d H:is')
+				$datetime1 = strtotime($getStartEnd->start);
+				$datetime2 = strtotime(date('Y-m-d H:i:s'));
 
-				// $secs = $datetime2 - $datetime1;
-				// $days = $secs / 86400;
+				$secs = $datetime2 - $datetime1;
+				$minutes = round($secs / 60);
+				// var_dump($minutes);
+
+
 				$this->Model_Guru->updateSession($kode_materi, $nis_nip, [
-					'end' => date('Y-m-d H:i:s')
-					//'end' => date('Y-m-d H:i:s')
+					'end' => date('Y-m-d H:i:s'),
+					'real_time' => $minutes
 				]);
-				$this->session->set_flashdata('message_success', 'Anda Telah Berhasil Mengerjakan Problem Pertemuan Ini! ');
+				$this->session->set_flashdata('message_success', 'Anda Telah Berhasil Mengerjakan Problem Pertemuan Ini Selama ' . $minutes. ' Menit!');
 				redirect('/siswa/problem');
 			} else {
 				$posisi = $soalProblem->id_soal;

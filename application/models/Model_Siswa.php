@@ -88,6 +88,41 @@ class Model_Siswa extends CI_Model
         return $query->result();
     }
 
+    public function tampil_nilai_recall_limit(){
+        $this->db->select('tb_recall.id_recall, tb_recall.nama_recall, tb_hasil_recall.id_recall, 
+        tb_hasil_recall.skor_total, tb_hasil_recall.nis_nip, tb_akun.nama_akun');
+        $this->db->from('tb_recall');
+        $this->db->join('tb_hasil_recall', 'tb_hasil_recall.id_recall=tb_recall.id_recall');
+        $this->db->join('tb_akun', 'tb_akun.nis_nip=tb_hasil_recall.nis_nip');
+        $this->db->order_by('skor_total',  'DESC');
+        $this->db->limit(3);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function tampil_nilai_formatif_limit(){
+        $this->db->select('tb_formatif.id_formatif, tb_formatif.nama_formatif, tb_hasil_formatif.id_formatif, 
+        tb_hasil_formatif.skor_total, tb_hasil_formatif.nis_nip, tb_akun.nama_akun');
+        $this->db->from('tb_formatif');
+        $this->db->join('tb_hasil_formatif', 'tb_hasil_formatif.id_formatif=tb_formatif.id_formatif');
+        $this->db->join('tb_akun', 'tb_akun.nis_nip=tb_hasil_formatif.nis_nip');
+        $this->db->order_by('skor_total',  'DESC');
+        $this->db->limit(3);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function tampil_nilai_evaluasi_limit(){
+        $this->db->select('tb_evaluasi_materi.id_evaluasi, tb_evaluasi_materi.nama_evaluasi, tb_hasil_evaluasi.id_evaluasi, 
+        tb_hasil_evaluasi.skor_total, tb_hasil_evaluasi.nis_nip, tb_akun.nama_akun');
+        $this->db->from('tb_evaluasi_materi');
+        $this->db->join('tb_hasil_evaluasi', 'tb_hasil_evaluasi.id_evaluasi=tb_evaluasi_materi.id_evaluasi');
+        $this->db->join('tb_akun', 'tb_akun.nis_nip=tb_hasil_evaluasi.nis_nip');
+        $this->db->order_by('skor_total',  'DESC');
+        $this->db->limit(3);
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function ambil_skor_recall($id_recall) {
         $this->db->select("*");
 		$this->db->where("id_recall", $id_recall);
@@ -195,5 +230,25 @@ class Model_Siswa extends CI_Model
         return $query->result();
     }
 
+    public function getChartData2($nis_nip) {
+        $data = [];
+        $query = $this->db->select('kode_materi, judul')->from('tb_materi')->get()->result();
+
+        foreach($query as $dataItem){
+            $id_recall = $this->db->select('tb_recall.id_recall')->from('tb_recall')->where('kode_materi = '. $dataItem->kode_materi)->get()->result()[0]->id_recall;
+            $id_evaluasi = $this->db->select('tb_evaluasi_materi.id_evaluasi')->from('tb_evaluasi_materi')->where('kode_materi ='. $dataItem->kode_materi)->get()->result()[0]->id_evaluasi;
+            // print("<pre>"."kode materi ".print_r($dataItem->judul,true)."id recall ".print_r($id_recall,true)."id eval ".print_r($id_evaluasi,true)."</pre>");
+
+            $dataMateri = array(
+                $dataItem->judul,
+                $this->db->select('skor_total')->from('tb_hasil_recall')->where('tb_hasil_recall.id_recall = '.$id_recall)->where('nis_nip = '.$nis_nip)->get()->result_array()[0]["skor_total"],
+                $this->db->select('skor_total')->from('tb_hasil_evaluasi')->where('tb_hasil_evaluasi.id_evaluasi = '.$id_evaluasi)->where('nis_nip = '.$nis_nip)->get()->result_array()[0]["skor_total"]
+            );
+            array_push($data, $dataMateri);
+        }
+        // print("<pre>".print_r($data,true)."</pre>");
+
+        return $data;
+    }
 }
 ?>

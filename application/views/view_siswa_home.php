@@ -82,17 +82,38 @@
                   </div>
                 </div>
             </div>
+            
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 ">
           <div class="card">
               <div class="card-body pb-0">
                 <h5 class="card-title">Top Score Recall <span>| kelas 11</span></h5>            
                 <div class="news">
                   <div class="post-item clearfix">
-                    <img src="assets/img/news-1.jpg" alt="">
-                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                    <!-- Default Table -->
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Test</th>
+                            <th scope="col">Nama Siswa</th>
+                            <th scope="col">Skor</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $i = 1;
+                            foreach ($dataku as $d) :?> 
+                              <tr>
+                                  <td><?=$i++ ?></td>
+                                  <td><?=$d->nama_recall?></td>
+                                  <td><?=$d->nama_akun?></td>
+                                  <td><?=$d->skor_total?></td>
+                              </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
+                    <!-- End Default Table Example -->
                   </div>
                 </div><!-- End sidebar recent posts-->
               </div>
@@ -100,9 +121,27 @@
                 <h5 class="card-title">Top Score Formatif <span>| kelas 11</span></h5>            
                 <div class="news">
                   <div class="post-item clearfix">
-                    <img src="assets/img/news-1.jpg" alt="">
-                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Test</th>
+                            <th scope="col">Nama Siswa</th>
+                            <th scope="col">Skor</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $i = 1;
+                            foreach ($dataku2 as $d) :?> 
+                              <tr>
+                                  <td><?=$i++ ?></td>
+                                  <td><?=$d->nama_formatif?></td>
+                                  <td><?=$d->nama_akun?></td>
+                                  <td><?=$d->skor_total?></td>
+                              </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
                   </div>
                 </div><!-- End sidebar recent posts-->
               </div>
@@ -110,9 +149,27 @@
                 <h5 class="card-title">Top Score Evaluasi<span>| kelas 11</span></h5>            
                 <div class="news">
                   <div class="post-item clearfix">
-                    <img src="assets/img/news-1.jpg" alt="">
-                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Test</th>
+                            <th scope="col">Nama Siswa</th>
+                            <th scope="col">Skor</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $i = 1;
+                            foreach ($dataku3 as $d) :?> 
+                              <tr>
+                                  <td><?=$i++ ?></td>
+                                  <td><?=$d->nama_evaluasi?></td>
+                                  <td><?=$d->nama_akun?></td>
+                                  <td><?=$d->skor_total?></td>
+                              </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
                   </div>
                 </div><!-- End sidebar recent posts-->
               </div>

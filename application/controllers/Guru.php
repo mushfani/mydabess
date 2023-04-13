@@ -44,7 +44,7 @@ class Guru extends CI_Controller {
 	{
 		$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_recall_materi();
 		$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
-		$dataevaluasi['$dataevaluasi']=$this->Model_Guru->getRecords5();
+		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords5();
 		//$dataevaluasi['dataidrecall']=$id_recall;
 		$this->load->view('view_guru_recall', $dataevaluasi);
 	}
@@ -165,7 +165,7 @@ class Guru extends CI_Controller {
 		$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_eval_materi();
 		$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
 		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords3();
-		$dataevaluasi['$datasiswa']=$this->Model_Guru->join_evaluasi_siswa();
+		$dataevaluasi['datasiswa']=$this->Model_Guru->join_evaluasi_siswa();
 		$this->load->view('view_guru_getall_evaluasi', $dataevaluasi);
 		
 	}
@@ -242,6 +242,12 @@ class Guru extends CI_Controller {
 		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords11();
 		$dataevaluasi['datasiswa']=$this->Model_Guru->join_problem_siswa();
 		$this->load->view('view_guru_getall_problem', $dataevaluasi);
+	}
+
+	public function detail_getall_problem($id_problem){
+		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords11ByIdProblem($id_problem);
+		$dataevaluasi['datasiswa']=$this->Model_Guru->join_problem_siswa_byIdDistinc($id_problem);
+		$this->load->view('view_guru_detail_getall_problem', $dataevaluasi);
 	}
 
 	public function detail_getall_lkpd($id_lkpd){
