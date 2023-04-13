@@ -233,21 +233,30 @@ class Model_Siswa extends CI_Model
     public function getChartData2($nis_nip) {
         $data = [];
         $query = $this->db->select('kode_materi, judul')->from('tb_materi')->get()->result();
-
-        foreach($query as $dataItem){
-            $id_recall = $this->db->select('tb_recall.id_recall')->from('tb_recall')->where('kode_materi = '. $dataItem->kode_materi)->get()->result()[0]->id_recall;
-            $id_evaluasi = $this->db->select('tb_evaluasi_materi.id_evaluasi')->from('tb_evaluasi_materi')->where('kode_materi ='. $dataItem->kode_materi)->get()->result()[0]->id_evaluasi;
-            // print("<pre>"."kode materi ".print_r($dataItem->judul,true)."id recall ".print_r($id_recall,true)."id eval ".print_r($id_evaluasi,true)."</pre>");
-
-            $dataMateri = array(
-                $dataItem->judul,
-                $this->db->select('skor_total')->from('tb_hasil_recall')->where('tb_hasil_recall.id_recall = '.$id_recall)->where('nis_nip = '.$nis_nip)->get()->result_array()[0]["skor_total"],
-                $this->db->select('skor_total')->from('tb_hasil_evaluasi')->where('tb_hasil_evaluasi.id_evaluasi = '.$id_evaluasi)->where('nis_nip = '.$nis_nip)->get()->result_array()[0]["skor_total"]
-            );
-            array_push($data, $dataMateri);
+    
+        foreach ($query as $dataItem) {
+            $recall_result = $this->db->select('tb_recall.id_recall')->from('tb_recall')->where("kode_materi = '{$dataItem->kode_materi}'")->get()->result();
+            $id_recall = !empty($recall_result) ? $recall_result[0]->id_recall : null;
+    
+            $evaluasi_result = $this->db->select('tb_evaluasi_materi.id_evaluasi')->from('tb_evaluasi_materi')->where("kode_materi = '{$dataItem->kode_materi}'")->get()->result();
+            $id_evaluasi = !empty($evaluasi_result) ? $evaluasi_result[0]->id_evaluasi : null;
+    
+            if ($id_recall !== null && $id_evaluasi !== null) {
+                $recall_score_result = $this->db->select('skor_total')->from('tb_hasil_recall')->where("tb_hasil_recall.id_recall = '{$id_recall}'")->where("nis_nip = '{$nis_nip}'")->get()->result_array();
+                $recall_score = !empty($recall_score_result) ? $recall_score_result[0]["skor_total"] : 0;
+    
+                $evaluasi_score_result = $this->db->select('skor_total')->from('tb_hasil_evaluasi')->where("tb_hasil_evaluasi.id_evaluasi = '{$id_evaluasi}'")->where("nis_nip = '{$nis_nip}'")->get()->result_array();
+                $evaluasi_score = !empty($evaluasi_score_result) ? $evaluasi_score_result[0]["skor_total"] : 0;
+    
+                $dataMateri = array(
+                    $dataItem->judul,
+                    $recall_score,
+                    $evaluasi_score
+                );
+                array_push($data, $dataMateri);
+            }
         }
-        // print("<pre>".print_r($data,true)."</pre>");
-
+    
         return $data;
     }
 }

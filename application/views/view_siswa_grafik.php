@@ -1,5 +1,8 @@
 <?php include 'master/header.php'; ?>
-| Grafik Siswa </title><head>
+<head>
+  <title>Grafik Siswa</title>
+</head>
+<body>
 <?php include 'master/navbar_siswa.php'; ?>
 
     <div class="pagetitle">
@@ -11,7 +14,7 @@
           <li class="breadcrumb-item active">Data</li>
         </ol>
       </nav>
-      <?php print("<pre>".print_r($chart_data,true)."</pre>");?>
+      <!-- <?php print("<pre>".print_r($chart_data,true)."</pre>");?> -->
     </div><!-- End Page Title -->
   <main>
 
@@ -40,72 +43,61 @@
               <div id="reportsChart"></div>
 
               <script>
-                var data = <?php echo json_encode($chart_data); ?>;
-                
-                var chart_data = {
-                  categories: [],
-                  evaluasi_scores: [],
-                  recall_scores: [],
-                  formatif_scores: []
-                };
 
-                for (var i = 0; i < data.length; i++) {
-                  chart_data.categories.push(data[i].[0]);
-                  chart_data.evaluasi_scores.push(parseFloat(data[i].[1]));
-                  chart_data.recall_scores.push(parseFloat(data[i].[0]));
-                  // chart_data.formatif_scores.push(parseFloat(data[i].formatif_score));
-                }
-
-                document.addEventListener("DOMContentLoaded", () => {
-                  new ApexCharts(document.querySelector("#reportsChart"), {
-                    series: [{
-                      name: 'Evaluasi Score',
-                      data: chart_data.evaluasi_scores
-                    }, {
-                      name: 'Recall Score',
-                      data: chart_data.recall_scores
-                    }, {
-                      name: 'Formatif Score',
-                      data: chart_data.formatif_scores
-                    }],
-                    chart: {
-                      height: 350,
-                      type: 'area',
-                      toolbar: {
-                        show: false
-                      },
-                    },
-                    markers: {
-                      size: 4
-                    },
-                    colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                    fill: {
-                      type: "gradient",
-                      gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.3,
-                        opacityTo: 0.4,
-                        stops: [0, 90, 100]
-                      }
-                    },
-                    dataLabels: {
-                      enabled: false
-                    },
-                    stroke: {
-                      curve: 'smooth',
-                      width: 2
-                    },
-                    xaxis: {
-                      categories: chart_data.categories
-                    },
-                    tooltip: {
-                      x: {
-                        format: 'dd/MM/yy HH:mm'
-                      },
-                    }
-                  }).render();
-                });
-              </script>
+const chartData = <?php echo json_encode($chart_data); ?>;
+    const categories = chartData.map(item => item[0]);
+    const recallSeries = chartData.map(item => item[1]);
+    const evaluasiSeries = chartData.map(item => item[2]);
+                      document.addEventListener("DOMContentLoaded", () => {
+                        new ApexCharts(document.querySelector("#reportsChart"), {
+                          series: [
+            {
+                name: 'Recall',
+                data: recallSeries
+            },
+            {
+                name: 'Evaluasi',
+                data: evaluasiSeries
+            }
+        ],
+                          chart: {
+                            height: 350,
+                            type: 'area',
+                            toolbar: {
+                              show: false
+                            },
+                          },
+                          markers: {
+                            size: 4
+                          },
+                          colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                          fill: {
+                            type: "gradient",
+                            gradient: {
+                              shadeIntensity: 1,
+                              opacityFrom: 0.3,
+                              opacityTo: 0.4,
+                              stops: [0, 90, 100]
+                            }
+                          },
+                          dataLabels: {
+                            enabled: false
+                          },
+                          stroke: {
+                            curve: 'smooth',
+                            width: 2
+                          },
+                          xaxis: {
+            categories: categories
+        },
+                          tooltip: {
+                            x: {
+                              format: 'dd/MM/yy HH:mm'
+                            },
+                          }
+                        }).render();
+                      });
+                    </script>
               <!-- End Line Chart -->
 
                   </div>
