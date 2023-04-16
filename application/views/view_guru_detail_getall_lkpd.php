@@ -20,7 +20,7 @@
               <h5 class="card-title">Data Siswa Hasil LKPD</h5>
               <p>Ini adalah daftar hasil skor LKPD siswa yang tersedia dalam pembelajaran anda</p>
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table class="table datatable" >
                 <thead>
                   <tr>
                     <th scope="col">#</th>

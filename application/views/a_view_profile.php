@@ -13,10 +13,10 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <main id="main" class="main">
+    <main>
         <section class="section profile">
             <div class="row">
-                <div class="col-8">
+                <div class="col-6 d-flex">
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                             <img src="<?= base_url(); ?>/assets/img/cinta.png" alt="Profile" class="rounded-circle">
@@ -28,6 +28,22 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-6 d-flex">
+                  <div class="card">
+                    <div class="card-body " >
+                      <h5 class="card-title">Data <span>| Pengembang</span></h5>
+                      <div class="d-flex align-items-center">
+                        <div class="ps-3" style="font-size:12px">
+                            Hello I am a computer science of education student with an interest 
+                            in the arts of writing, design,  creative fields, and education. 
+                            I am a temporary work in elementary school and sometimes write for fun fiction 
+                            stories and aspire to be a educator, creator, operator, or content writer in industry.
+                            So if you want to know more about me or want to ask me just visit me on my social media!
+                        </div>
+                    </div>
+                  </div>
+                  </div>
                 </div>
             </div>
         </section>

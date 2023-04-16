@@ -1,19 +1,10 @@
 <?php include 'master/header.php'; ?>
-<head>
-  <title>Grafik Siswa</title>
-</head>
-<body>
+ | Grafik Siswa  </title><head>
 <?php include 'master/navbar_siswa.php'; ?>
 
     <div class="pagetitle">
       <h1>Daftar Grafik Progress Siswa</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
+      
       <!-- <?php print("<pre>".print_r($chart_data,true)."</pre>");?> -->
     </div><!-- End Page Title -->
   <main>
@@ -40,26 +31,29 @@
                     <h5 class="card-title">Reports <span>/Rekap Pembelajaran</span></h5>
 
                     <!-- Line Chart -->
-              <div id="reportsChart"></div>
+                      <div id="reportsChart"></div>
 
               <script>
 
-const chartData = <?php echo json_encode($chart_data); ?>;
-    const categories = chartData.map(item => item[0]);
-    const recallSeries = chartData.map(item => item[1]);
-    const evaluasiSeries = chartData.map(item => item[2]);
-                      document.addEventListener("DOMContentLoaded", () => {
-                        new ApexCharts(document.querySelector("#reportsChart"), {
-                          series: [
-            {
-                name: 'Recall',
-                data: recallSeries
-            },
-            {
-                name: 'Evaluasi',
-                data: evaluasiSeries
-            }
-        ],
+                const chartData = <?php echo json_encode($chart_data); ?>;
+                const categories = chartData.map(item => item[0]);
+                const recallSeries = chartData.map(item => item[1]);
+                const evaluasiSeries = chartData.map(item => item[2]);
+                const formatifSeries = chartData.map(item => item[3]);
+                document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#reportsChart"), {
+                series: [{
+                            name: 'Recall',
+                            data: recallSeries
+                        },
+                        {
+                            name: 'Evaluasi',
+                            data: evaluasiSeries
+                        },
+                        {
+                            name: 'Formatif',
+                            data: formatifSeries
+                        }],
                           chart: {
                             height: 350,
                             type: 'area',
@@ -88,8 +82,8 @@ const chartData = <?php echo json_encode($chart_data); ?>;
                             width: 2
                           },
                           xaxis: {
-            categories: categories
-        },
+                              categories: categories
+                          },
                           tooltip: {
                             x: {
                               format: 'dd/MM/yy HH:mm'
@@ -104,8 +98,6 @@ const chartData = <?php echo json_encode($chart_data); ?>;
 
                 </div>
               </div><!-- End Reports -->
-
-        
             </div>
         </div>
       </div>

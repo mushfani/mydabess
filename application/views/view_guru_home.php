@@ -13,19 +13,13 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-      <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
-
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <h5 class="card-title">Panduan <span>| Mata Pelajaran</span></h5>
 
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="font-size:12px">
                             <div class="ps-3">
                                 1. Klik menu <b> Pertemuan Pembelajaran </b><br>
                                 2. Pilih menu <b> Mata Pelajaran </b><br>
@@ -38,13 +32,12 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- End Panduan Card -->
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
+            </div>
+            <div class="col-lg-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <h5 class="card-title">Panduan <span>| Materi</span></h5>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="font-size:12px">
                             <div class="ps-3">
                                 1. Klik menu <b> Pertemuan Pembelajaran </b><br>
                                 2. Pilih menu <b> Materi </b><br>
@@ -57,13 +50,12 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- End Panduan Card -->
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
+            </div>
+            <div class="col-lg-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <h5 class="card-title">Panduan <span>| Recall Quiz</span></h5>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="font-size:12px">
                             <div class="ps-3">
                                 1. Klik menu <b> Pertemuan Pembelajaran </b><br>
                                 2. Pilih menu <b> Recall Quiz </b><br>
@@ -76,13 +68,12 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- End Panduan Card -->
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
+            </div>
+            <div class="col-lg-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <h5 class="card-title">Panduan <span>| LKPD</span></h5>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="font-size:12px">
                             <div class="ps-3">
                                 1. Klik menu <b> Pertemuan Pembelajaran </b><br>
                                 2. Pilih menu <b> LKPD </b><br>
@@ -95,16 +86,15 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- End Panduan Card -->
-             <!-- Panduan Card -->
-             <div class="col-xxl-4 col-xl-12">
+            </div>
+            <div class="col-lg-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <h5 class="card-title">Panduan <span>| Evaluasi</span></h5>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="font-size:12px">
                         <div class="ps-3">
                                 1. Klik menu <b> Pertemuan Pembelajaran </b><br>
-                                2. Pilih menu <b> Evalusi  </b><br>
+                                2. Pilih menu <b> Evaluasi  </b><br>
                                 3. List evaluasi yang telah dibuat akan ditampilkan<br>
                                 4. Klik menu  <b> Tambah Evaluasi </b> untuk menambahkan evaluasi baru<br>
                                 5. Silakan isi forrm tambah evaluasi tersedia dan submit form tambah<br>
@@ -114,8 +104,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- End Panduan Card -->
-      </div>
+            </div>
+        </div>
     </section>
 
   </main><!-- End #main -->

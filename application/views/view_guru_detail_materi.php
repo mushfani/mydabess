@@ -17,58 +17,47 @@
 
     <section class="section dashboard">
       <div class="row">
-
-        <!-- Left side columns -->
         <div class="col-lg-12">
-          <div class="row">
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
-              <div class="card info-card customers-card">
-                <div class="card-body">
-                  <h5 class="card-title"><?= $datamateri->judul?> <span>| <?= $datamateri->sub_judul?></span></h5>
-                  <div class="d-flex align-items-center">
-                    <div class="ps-3">
-                      <?= $datamateri->deskripsi?> 
-                    </div>
-                  </div>
+          <div class="card info-card customers-card">
+            <div class="card-body">
+              <h5 class="card-title"><?= $datamateri->judul?> <span>| <?= $datamateri->sub_judul?></span></h5>
+              <div class="d-flex align-items-center">
+                <div class="ps-3">
+                  <?= $datamateri->deskripsi?> 
                 </div>
               </div>
-            </div><!-- End Panduan Card -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="card info-card customers-card">
+              <div class="card-body">
+                  <h5 class="card-title">Video <span>| Materi</span></h5>
+                  <div class="d-flex align-items-center">
+                      <div class="ps-3">
+                        Supaya kamu dapat lebih memahami materi, yuk simak video materi berikut!
+                        <iframe width="800" height="400" src="https://www.youtube.com/embed/<?= $datamateri->video_materi ?>" frameborder="0" allowfullscreen></iframe>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="card info-card customers-card">
+            <div class="card-body">
+                <h5 class="card-title">Modul <span>| Materi</span></h5>
 
-
-            <!-- Panduan Card -->
-            <div class="col-xxl-4 col-xl-12">
-                <div class="card info-card customers-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Video <span>| Materi</span></h5>
-                        <div class="d-flex align-items-center">
-                            <div class="ps-3">
-                              Supaya kamu dapat lebih memahami materi, yuk simak video materi berikut!
-                              <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $datamateri->video_materi ?>" frameborder="0" allowfullscreen></iframe>
-                            </div>
-                        </div>
+                <div class="d-flex align-items-center">
+                    <div class="ps-3">
+                    Supaya kamu dapat lebih memahami materi, silakan baca dan download modul materi berikut!
+                    <iframe src="https://drive.google.com/file/d/<?= $datamateri->modul_materi ?>" width="800" height="480" allow="autoplay"></iframe>
                     </div>
                 </div>
-            </div><!-- End Panduan Card -->
-
-             <!-- Panduan Card -->
-             <div class="col-xxl-4 col-xl-12">
-                <div class="card info-card customers-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Modul <span>| Materi</span></h5>
-
-                        <div class="d-flex align-items-center">
-                            <div class="ps-3">
-                            Supaya kamu dapat lebih memahami materi, silakan baca dan download modul materi berikut!
-                            <iframe src="https://drive.google.com/file/d/<?= $datamateri->modul_materi ?>" width="560" height="480" allow="autoplay"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Panduan Card -->
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-
   </main><!-- End #main -->
   <!-- Vendor JS Files -->
   <script src="<?php echo base_url() ?>/assets/vendor/apexcharts/apexcharts.min.js"></script>

@@ -4,12 +4,15 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <div class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block">MYDabess</span>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+        <span class="d-none d-lg-block">MyDabess</span>
+        
       </div>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
+      
       <ul class="d-flex align-items-center">
 
         <li class="nav-item dropdown pe-3">
@@ -54,7 +57,8 @@
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url() ?>siswa/index">
           <i class="bi bi-grid"></i>
-          <span>Panduan</span>
+          <span>Dashboard</span>
+          
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -111,11 +115,6 @@
               <i class="bi bi-circle"></i><span>Evaluasi</span>
             </a>
           </li>
-          <li>
-            <a href="<?php echo base_url() ?>siswa/rekap">
-              <i class="bi bi-circle"></i><span>Rekap Pertemuan</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Components Nav -->
 
@@ -140,12 +139,18 @@
       <li class="nav-item">
         <a class="nav-link " href="<?php echo base_url() ?>siswa/grafik">
           <i class="bi bi-bar-chart"></i>
-          <span>Rekap Grafik Pembelajaran</span>
+          <span>Grafik Pembelajaran</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="<?php echo base_url() ?>siswa/panduan">
+        <i class="bi bi-question-circle"></i>
+          <span>Panduan</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
         <a class="nav-link " href="<?php echo base_url() ?>siswa/profil_dev">
-        <i class="bi bi-question-circle"></i>
+        <i class="bi bi-person"></i>
           <span>Profil Pengembang</span>
         </a>
       </li><!-- End Dashboard Nav -->

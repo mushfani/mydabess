@@ -4,13 +4,7 @@
 
     <div class="pagetitle">
       <h1> Daftar LKPD </h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
+      
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -62,9 +56,11 @@
                         <td><iframe src="https://docs.google.com/document/d/e/<?=$d->file_lkpd?>" width="560" height="250" allow="autoplay"></iframe></td>
                         <td>
                           <?php if ($d->total_jawaban_siswa > 0): ?>
-                            <p>Sudah Menjawab</p>
+                            <span class="badge rounded-pill bg-success">Sudah Menjawab</span>
+                          
                           <?php else: ?>
-                            <p>Belum Menjawab</p>
+                            <span class="badge rounded-pill bg-danger">Belum Menjawab</span>
+                            
                           <?php endif; ?>
                         </td>
                     </tr>

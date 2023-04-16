@@ -70,7 +70,7 @@
                 </thead>
                 <tbody>
                   <?php $i = 1;
-                  foreach ($datasoalevaluasi as $d) :?> 
+                  foreach ($dataevaluasi as $d) :?> 
                     <tr>
                         <td><?=$i++ ?></td>
                         <td><?=$d->soal ?></td>

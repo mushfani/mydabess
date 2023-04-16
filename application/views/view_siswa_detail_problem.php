@@ -4,23 +4,26 @@
 
     <div class="pagetitle">
         <h1>Daftar Soal Problem </h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
+
     </div><!-- End Page Title -->
 
        <!-- Soal Card -->
-    <div class="col-xxl-4 col-xl-12">
+    <div class="col-lg-12">
         <div class="card info-card customers-card">
             <div class="card-body">
-                <h5 class="card-title">Kerjakan soal dengan benar dan teliti!</h5>
+                <h5 class="card-title" style="font-size:16px">Kerjakan soal dengan benar dan teliti!</h5>
                 <?php if ($this->session->flashdata('message_success')): ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <?= $this->session->flashdata('message_success') ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($this->session->flashdata('message_failed')): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= $this->session->flashdata('message_failed') ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -37,7 +40,7 @@
                                             <h5 class="card-title">Video Problem Materi <span>| <?=$datasoal->id_soal?> </span></h5>
                                             <div class="d-flex align-items-center">
                                                 <div class="ps-3">
-                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $datasoal->video_problem ?>" frameborder="0" allowfullscreen></iframe>
+                                                    <iframe width="700" height="400" src="https://www.youtube.com/embed/<?= $datasoal->video_problem ?>" frameborder="0" allowfullscreen></iframe>
                                                 </div>
                                             </div>
                                         </div>

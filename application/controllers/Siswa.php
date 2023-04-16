@@ -17,12 +17,30 @@ class Siswa extends CI_Controller {
 	public function index()
 	{
 		$nis_nip	= $this->session->userdata('nis_nip');
-		$data['chart_data']=$this->Model_Siswa->getChartData($nis_nip);
+		
+		$data['chart_data']=$this->Model_Siswa->getChartData2($nis_nip);
 		$data['dataku']=$this->Model_Siswa->tampil_nilai_recall_limit();
 		$data['dataku2']=$this->Model_Siswa->tampil_nilai_formatif_limit();
 		$data['dataku3']=$this->Model_Siswa->tampil_nilai_evaluasi_limit();
+
+		$data['data']=$this->Model_Siswa->tampil_nilai_recall_byId();
+		$data['data2']=$this->Model_Siswa->tampil_nilai_problem_byId();
+		$data['data3']=$this->Model_Siswa->tampil_nilai_formatif_byId();
+		$data['data4']=$this->Model_Siswa->tampil_nilai_evaluasi_byId();
+
+		$data['datamaterijoin']=$this->Model_Siswa->join_lkpd_materi($this->session->userdata('nis_nip'));
+
+		$data['dataproblemjoin']=$this->Model_Siswa->join_problem();
+
+		$data['datamateri']=$this->Model_Guru->getRecords2();
+		$data['dataevaluasi']=$this->Model_Guru->getRecords9();
         
 		$this->load->view('view_siswa_home', $data);
+	}
+
+	public function panduan()
+	{        
+		$this->load->view('view_siswa_panduan');
 	}
 
 	public function profil_dev(){
@@ -51,7 +69,7 @@ class Siswa extends CI_Controller {
             );
 
 			$this->Model_Siswa->tambahdata_mapel($data2);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('siswa/mata_pelajaran');
 		} else {
 			
@@ -139,7 +157,7 @@ class Siswa extends CI_Controller {
 
 		$this->Model_Siswa->tambahdata_nilai_formatif($data);	
 		$eval = $this->Model_Siswa->ambil_skor_formatif($id_formatif);
-		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan Test Recall Dengan Skor ' . $eval->skor_total. '!');	
+		$this->session->set_flashdata('message_success', 'Anda berhasil mengerjakan test dengan skor ' . $eval->skor_total. '!');	
 				
 		redirect('siswa/formatif');
 
@@ -187,7 +205,7 @@ class Siswa extends CI_Controller {
 
 		$this->Model_Siswa->tambahdata_nilai_evaluasi($data);
 		$eval = $this->Model_Siswa->ambil_skor_eval($id_evaluasi);
-		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan Test Recall Dengan Skor ' . $eval->skor_total. '!');	
+		$this->session->set_flashdata('message_success', 'Anda berhasil mengerjakan test dengan skor ' . $eval->skor_total. '!');	
 			
 		redirect('siswa/evaluasi');
 
@@ -214,7 +232,7 @@ class Siswa extends CI_Controller {
 
 		$this->Model_Siswa->tambahdata_nilai_recall($data);
 		$recall = $this->Model_Siswa->ambil_skor_recall($id_recall);
-		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan Test Recall Dengan Skor ' . $recall->skor_total. '!');	
+		$this->session->set_flashdata('message_success', 'Anda berhasil mengerjakan test dengan skor ' . $recall->skor_total. '!');	
 		redirect('/siswa/recall');
 	}
 
@@ -305,7 +323,7 @@ class Siswa extends CI_Controller {
 
 		$lkpd = $this->Model_Guru->ambil_lkpd($id_lkpd);
 
-		$this->session->set_flashdata('message_success', 'Anda Berhasil Mengerjakan ' . $lkpd->nama_lkpd . ' ini');
+		$this->session->set_flashdata('message_success', 'Anda berhasil mengerjakan ' . $lkpd->nama_lkpd . ' ini');
 		redirect('/siswa/lkpd');	
 	}
 
@@ -389,8 +407,6 @@ class Siswa extends CI_Controller {
 		}
 
 		$datasoalevaluasi['datasoal']=$this->Model_Guru->tampilproblem_by_id($id_problem);
-		//$datasoalevaluasi['datamateri']=$this->Model_Guru->join_problem_materi();
-		//$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoalrecall_by_id($id_recall);
 		$this->load->view('view_siswa_detail_problem',  $datasoalevaluasi);
 		
 		
@@ -424,7 +440,7 @@ class Siswa extends CI_Controller {
 					'jawaban' => " ",
 					'score'	  => 100,
 					'retry'	  => 0
-				);		
+				);
 				$this->Model_Guru->create_jawaban_siswa($data);
 			} else {
 				$cekGetRetry = $this->Model_Guru->getJawabanById($jawabanGuru[0]->id_jawaban_guru, $id_soal, $nis_nip);
@@ -440,6 +456,7 @@ class Siswa extends CI_Controller {
 				);
 				$this->Model_Guru->update_jawaban_siswa($cekGetRetry->id_jawaban_siswa, $data);
 			}
+
 			$soalProblem = $this->Model_Guru->tampilSoalProblemByIdSoal($id_soal);
 			if ($soalProblem->posisi == 'soal_terakhir') {
 
@@ -460,7 +477,11 @@ class Siswa extends CI_Controller {
 					'end' => date('Y-m-d H:i:s'),
 					'real_time' => $minutes
 				]);
-				$this->session->set_flashdata('message_success', 'Anda Telah Berhasil Mengerjakan Problem Pertemuan Ini Selama ' . $minutes. ' Menit!');
+
+				// $nilai = $this->Model_Guru->getSkorProblemByKodeMateri($kode_materi)
+
+
+				$this->session->set_flashdata('message_success', 'Anda berhasil mengerjakan problem pertemuan ini selama ' . $minutes. ' Menit!');
 				redirect('/siswa/problem');
 			} else {
 				$posisi = $soalProblem->id_soal;
@@ -468,7 +489,7 @@ class Siswa extends CI_Controller {
 				$problem = $this->Model_Guru->getPosisiJawaban($nextPosisi);
 				$id_problem = $problem->id_problem;
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
-				$this->session->set_flashdata('message_success', 'Jawaban Anda Benar! Kerjakan Problem Selanjutnya! ');
+				$this->session->set_flashdata('message_success', 'Jawaban anda benar! Kerjakan problem selanjutnya! ');
 				redirect('/siswa/detail_problem/' . $id_problem . '/' . $materi->kode_materi);
 			}
 		} else {
@@ -485,7 +506,7 @@ class Siswa extends CI_Controller {
 				);
 				$this->Model_Guru->create_jawaban_siswa($data);
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
-				$this->session->set_flashdata('message_success', 'Jawaban Anda Masih Belum Benar! ');
+				$this->session->set_flashdata('message_failed', 'Jawaban anda masih salah! ');
 				redirect('/siswa/detail_problem/' . $id_problem . '/' . $materi->kode_materi);
 			}
 			else{
@@ -504,7 +525,7 @@ class Siswa extends CI_Controller {
 				$this->Model_Guru->update_jawaban_siswa($cekGetRetry->id_jawaban_siswa, $data);
 
 				$materi = $this->Model_Guru->getProblemByIdProblem($id_problem);
-				$this->session->set_flashdata('message_success', 'Jawaban Anda Masih Belum Benar! ');
+				$this->session->set_flashdata('message_failed', 'Jawaban anda masih salah! ');
 				redirect('/siswa/detail_problem/' . $id_problem . '/' . $materi->kode_materi);
 			}
 			// jika jawabannya salah

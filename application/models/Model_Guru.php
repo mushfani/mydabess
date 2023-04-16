@@ -729,6 +729,7 @@ class Model_Guru extends CI_Model
     public function getDurasi($kode_materi){
         $this->db->select("*");
         $this->db->where("kode_materi", $kode_materi);
+        $this->db->where("nis_nip", $this->session->userdata('nis_nip'));
         $data = $this->db->get("tb_problem_session")->row();
         return $data;
     }

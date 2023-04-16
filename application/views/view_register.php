@@ -102,7 +102,7 @@
                       <label for="yourPassword" class="form-label">Kelas</label>
                       <input type="text" name="kelas" id="kelas"class="form-control" required>
                       <div class="invalid-feedback">Masukkan Kelas kamu!</div>
-                    </div>
+                    </div><br>
 
                     <div class="col-12">
                       <label for="role" class="form-label">Role</label>
@@ -118,7 +118,7 @@
                       </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12"><br>
                       <label class="custom-file-label" for="customFile">Foto Profil</label>
                       <div class="custom-file">
                         <input type="file" name="foto_profil" class="custom-file-input" id="customFile" size="20" >
@@ -131,7 +131,7 @@
                       });
                       </script>
                     </div>
-                      
+                    <br>
                     <div class="col-12">
                       <button type="submit" name="button" class="btn btn-primary w-100">Register</button>
                     </div>

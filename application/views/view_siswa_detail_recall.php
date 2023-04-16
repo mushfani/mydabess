@@ -4,21 +4,15 @@
 
     <div class="pagetitle">
         <h1>Daftar Soal <?= $datamateri->nama_recall?> </h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
+      
     </div><!-- End Page Title -->
 
     <!-- Soal Card -->
-    <div class="col-xxl-4 col-xl-12">
+    <div class="col-lg-12">
         <div class="card info-card customers-card">
             <div class="card-body">
-                <h5 class="card-title">Kerjakan soal dengan benar dan teliti!</h5>
-                <div class="d-flex align-items-center">
+                <h5 class="card-title" style="font-size:16px">Kerjakan soal dengan benar dan teliti!</h5>
+                <div class="d-flex align-items-center" style="font-size:12px">
                     <div class="ps-3">
                         <form method="post" action="<?php echo base_url(). 'siswa/cek_recall/' . $idrecall; ?>">
                             <?php 

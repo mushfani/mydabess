@@ -4,13 +4,7 @@
 
     <div class="pagetitle">
         <h1>Daftar Soal Posttest Basis Data </h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
+      
     </div><!-- End Page Title -->
 
     <!-- Soal Card -->
@@ -18,14 +12,17 @@
         <div class="card info-card customers-card">
             <div class="card-body">
                 <h5 class="card-title">Kerjakan soal dengan benar dan teliti!</h5>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" style="font-size:12px">
                     <div class="ps-3">
                         <form method="post" action="<?php echo base_url(). 'siswa/cek_pretest_basdat' ?>">
                             <?php 
                                 foreach ($datasoalevaluasi as $d) :?> 
                                 <div class="col">
-                                    <?=$d->no_soal?>
-                                    <td>. <?=$d->soal ?></td>                        
+                                    <br>
+                                </div>
+                                <div class="col">
+                                    <td><?=$d->no_soal?></td>  
+                                    <td>. <?=$d->soal ?></td><br><br>                     
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_a" value="a" required>
                                         <label class="form-check-label" for="option_<?=$d->no_soal?>">a. <?=$d->jawaban_a ?></label>

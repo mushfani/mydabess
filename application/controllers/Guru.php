@@ -223,8 +223,10 @@ class Guru extends CI_Controller {
 	public function detail_lkpd($id_lkpd)
 	{
 		$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_lkpd_materi();
-		$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
-		$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords9();
+		$dataevaluasi['datamateri']=$this->Model_Guru->tampillkpd_by_id($id_lkpd);
+		//$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords10();
+		$dataevaluasi['dataevaluasi']=$this->Model_Guru->tampilsoallkpd_by_id($id_lkpd);
+		$dataevaluasi['dataidlkpd']=$id_lkpd;
 		$this->load->view('view_guru_detail_lkpd', $dataevaluasi);
 	}
 
@@ -287,13 +289,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_mapel($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/mata_pelajaran');
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/mata_pelajaran', $data);
 		}
 
@@ -347,7 +349,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata($where, 'tb_mapel');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus!');
 		redirect('guru/mata_pelajaran');
 	}
 
@@ -387,13 +389,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_materi($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/materi');
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/materi', $data);
 		}
 
@@ -437,7 +439,7 @@ class Guru extends CI_Controller {
 
 			$this->Model_Guru->edit_materi($kode_materi, $data);
 			$this->session->set_flashdata('ver', 'FALSE');
-            $this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+            $this->session->set_flashdata('alert', 'Data berhasil diubah!');
 			redirect("guru/materi");
 		}
 		else {
@@ -455,7 +457,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_materi($where, 'tb_materi');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/materi');
 	}
 
@@ -476,12 +478,12 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_evaluasi($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/evaluasi');
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/evaluasi', $data);
 		}
 
@@ -567,13 +569,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_soalevaluasi($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/detail_evaluasi/'. $id_evaluasi);
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/detail_evaluasi/'. $id_evaluasi, $data);
 		}
 
@@ -606,7 +608,7 @@ class Guru extends CI_Controller {
 
 		$this->Model_Guru->edit_soalevaluasi($id_soal, $data);
 		$this->session->set_flashdata('ver', 'FALSE');
-		$this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+		$this->session->set_flashdata('alert', 'Data berhasil diubah!');
 		$datasoalevaluasi['datamateri']=$this->Model_Guru->tampilevaluasi_by_id($id_evaluasi);
 		$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoalevaluasi_by_id($id_evaluasi);
 		$datasoalevaluasi['dataidevaluasi']=$id_evaluasi;
@@ -621,7 +623,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_soalevaluasi($where, 'tb_soal_evaluasi');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/detail_evaluasi/'. $id_evaluasi);
 		// redirect($_SERVER['HTTP_REFERER']);
 	}
@@ -645,13 +647,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_formatif($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/formatif');
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/formatif', $data);
 		}
 	}
@@ -691,7 +693,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_evaluasi($where, 'tb_formatif');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/formatif');
 	}
 
@@ -712,13 +714,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_recall($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/recall');
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/recall', $data);
 		}
 	}
@@ -735,7 +737,7 @@ class Guru extends CI_Controller {
 
 			$this->Model_Guru->edit_recall($id_recall, $data);
 			$this->session->set_flashdata('ver', 'FALSE');
-            $this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+            $this->session->set_flashdata('alert', 'Data berhasil diubah!');
 			$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_recall_materi();
 			$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
 			$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords5();
@@ -758,7 +760,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_evaluasi($where, 'tb_recall');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/recall');
 	}
 
@@ -766,29 +768,29 @@ class Guru extends CI_Controller {
 	{
 		$this->form_validation->set_rules('kode_materi', 'kode_materi', 'required|trim');
 		$this->form_validation->set_rules('nama_lkpd', 'nama_lkpd','required|trim');
-		$this->form_validation->set_rules('file_lkpd', 'file_lkpd','required|trim');
+		// $this->form_validation->set_rules('file_lkpd', 'file_lkpd','required|trim');
 
 		if ($this->form_validation->run()==true)
 	   	{	
 
 			$kode_materi= $this->input->post('kode_materi');
 			$nama_lkpd	= $this->input->post('nama_lkpd');
-			$file_lkpd	= $this->input->post('file_lkpd');
+			// $file_lkpd	= $this->input->post('file_lkpd');
 
 			$data = array(
                 'kode_materi'	=> $kode_materi,
 				'nama_lkpd' 	=> $nama_lkpd,
-				'file_lkpd'		=> $file_lkpd
+				// 'file_lkpd'		=> $file_lkpd
             );
 
 			$this->Model_Guru->tambahdata_lkpd($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/lkpd');
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/lkpd', $data);
 		}
 	}
@@ -805,7 +807,7 @@ class Guru extends CI_Controller {
 
 			$this->Model_Guru->edit_lkpd($id_lkpd, $data);
 			$this->session->set_flashdata('ver', 'FALSE');
-            $this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+            $this->session->set_flashdata('alert', 'Data berhasil diubah!');
 			$dataevaluasi['datamaterijoin']=$this->Model_Guru->join_lkpd_materi();
 			$dataevaluasi['datamateri']=$this->Model_Guru->getRecords2();
 			$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords9();
@@ -828,7 +830,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_evaluasi($where, 'tb_lkpd');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/lkpd');
 	}
 
@@ -874,13 +876,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_soalrecall($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/detail_recall/'. $id_recall);
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/detail_recall/' . $id_recall, $data);
 		}
 	}
@@ -912,7 +914,7 @@ class Guru extends CI_Controller {
 
 		$this->Model_Guru->edit_soalrecall($id_soal, $data);
 		$this->session->set_flashdata('ver', 'FALSE');
-		$this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+		$this->session->set_flashdata('alert', 'Data berhasil diubah!');
 		$datasoalevaluasi['datamateri']=$this->Model_Guru->tampilrecall_by_id($id_recall);
 		$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoalrecall_by_id($id_recall);
 		$datasoalevaluasi['dataidrecall']=$id_recall;
@@ -927,7 +929,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_soalevaluasi($where, 'tb_recall_soal');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/detail_recall/'. $id_recall);
 		//redirect($_SERVER['HTTP_REFERER']);
 	}
@@ -972,13 +974,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_soalformatif($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/detail_formatif/'. $id_formatif);
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/detail_formatif/'. $id_formatif, $data);
 		}
 	}
@@ -1011,7 +1013,7 @@ class Guru extends CI_Controller {
 
 		$this->Model_Guru->edit_soalformatif($id_soal, $data);
 		$this->session->set_flashdata('ver', 'FALSE');
-		$this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+		$this->session->set_flashdata('alert', 'Data berhasil diubah!');
 		$datasoalevaluasi['datamateri']=$this->Model_Guru->tampilformatif_by_id($id_formatif);
 		$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoalformatif_by_id($id_formatif);
 		$datasoalevaluasi['dataidformatif']=$id_formatif;
@@ -1024,7 +1026,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_soalevaluasi($where, 'tb_formatif_soal');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/detail_formatif/'. $id_formatif);
 		// redirect($_SERVER['HTTP_REFERER']);
 	}
@@ -1052,13 +1054,13 @@ class Guru extends CI_Controller {
             );
 
 			$this->Model_Guru->tambahdata_soallkpd($data);
-			$this->session->set_flashdata('success_register','Data Berhasil ditambahkan!');
+			$this->session->set_flashdata('success_register','Data berhasil ditambahkan!');
 			redirect('guru/detail_lkpd/'. $id_lkpd);
 
 		}
 		else
 		{
-			$this->session->set_flashdata('error', 'Data Gagal ditambahkan!');
+			$this->session->set_flashdata('error', 'Data gagal ditambahkan!');
 			redirect('guru/detail_lkpd/'. $id_lkpd, $data);
 		}
 
@@ -1077,11 +1079,12 @@ class Guru extends CI_Controller {
 
 		$this->Model_Guru->edit_soallkpd($id_soal, $data);
 		$this->session->set_flashdata('ver', 'FALSE');
-		$this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+		$this->session->set_flashdata('alert', 'Data berhasil diubah!');
 		$datasoalevaluasi['datamateri']=$this->Model_Guru->tampillkpd_by_id($id_lkpd);
-		$datasoalevaluasi['datasoalevaluasi']=$this->Model_Guru->tampilsoallkpd_by_id($id_lkpd);
+		$datasoalevaluasi['dataevaluasi']=$this->Model_Guru->tampilsoallkpd_by_id($id_lkpd);
 		$datasoalevaluasi['dataidlkpd']= $id_lkpd;
 		$this->load->view('view_guru_detail_lkpd', $datasoalevaluasi);
+		
 
 	}
 
@@ -1091,7 +1094,7 @@ class Guru extends CI_Controller {
 		$hapus = $this->Model_Guru->hapusdata_soalevaluasi($where, 'tb_soal_lkpd');
 		$this->session->set_flashdata('ver', 'FALSE');
 		$this->session->set_flashdata('class_alert', 'info');
-		$this->session->set_flashdata('alert', 'Data Berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil dihapus');
 		redirect('guru/detail_lkpd/'. $id_lkpd);
 		// redirect($_SERVER['HTTP_REFERER']);
 	}
@@ -1119,7 +1122,7 @@ class Guru extends CI_Controller {
 
 			$this->Model_Guru->edit_skor_lkpd($id_soal, $nis_nip, $data);
 			$this->session->set_flashdata('ver', 'FALSE');
-            $this->session->set_flashdata('alert', 'Data Berhasil di ubah!');
+            $this->session->set_flashdata('alert', 'Data berhasil diubah!');
 
 			$dataevaluasi['dataevaluasi']=$this->Model_Guru->getRecords9ByIdLkpd($id_soal);
 			$dataevaluasi['datasiswa']=$this->Model_Guru->join_lkpd_soal_siswa_byId($id_soal, $nis_nip);

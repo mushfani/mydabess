@@ -4,50 +4,65 @@
 
     <div class="pagetitle">
         <h1>Daftar Kuesioner Pretest Logical Thinking </h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
+     
     </div><!-- End Page Title -->
 
     <!-- Soal Card -->
-    <div class="col-xxl-4 col-xl-12">
+    <div class="col-lg-12">
         <div class="card info-card customers-card">
             <div class="card-body">
-                <h5 class="card-title">Kerjakan kuesioner di bawah ini sesuai dengan kemampuan anda! Catatan : <br> 1 = Sangat Tidak Setuju <br> 2 = Tidak Setuju <br> 3 = Netral <br>
-                    4 = Setuju <br> 5 = Sangat Setuju
-                </h5>
+                <h5 class="card-title" style="font-size:16px">Kerjakan kuesioner di bawah ini sesuai dengan kemampuan anda!</h5>
+                <table>
+                    <tr>
+                        <td> 1 : Sangat Tidak Setuju,  </td>
+                        <td> 2 : Tidak Setuju,  </td>
+                        <td> 3 : Netral,  </td>
+                        <td> 4 : Setuju,  </td>
+                        <td> 5 : Sangat Setuju.  </td>
+                    </tr>
+                </table><br>
                 <div class="d-flex align-items-center">
                     <div class="ps-3">
                         <form method="post" action="<?php echo base_url(). 'siswa/cek_pretest_basdat' ?>">
                             <?php 
                                 foreach ($datasoalevaluasi as $d) :?> 
-                                <div class="col">
+                                <div class="col-lg-12">
                                     <?=$d->no_soal?>
-                                    <td>. <?=$d->soal ?></td>                        
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_a" value="a" required>
-                                        <label class="form-check-label" for="option_<?=$d->no_soal?>">1. <?=$d->jawaban_a ?></label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_b" value="b" required>
-                                        <label class="form-check-label" for="option_<?=$d->no_soal?>">2. <?=$d->jawaban_b ?></label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_c" value="c" required>
-                                        <label class="form-check-label" for="option_<?=$d->no_soal?>">3. <?=$d->jawaban_c ?></label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_d" value="d" required>
-                                        <label class="form-check-label" for="option_<?=$d->no_soal?>">4. <?=$d->jawaban_d ?></label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_e" value="e" required>
-                                        <label class="form-check-label" for="option_<?=$d->no_soal?>">5. <?=$d->jawaban_e ?></label>
-                                    </div>
+                                    <td>. <?=$d->soal ?></td>    
+                                    <table>
+                                        <tr>
+                                            <td> 
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_a" value="a" required>
+                                                    <label class="form-check-label mx-4" for="option_<?=$d->no_soal?>">1 <?=$d->jawaban_a ?></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_b" value="b" required>
+                                                    <label class="form-check-label mx-4" for="option_<?=$d->no_soal?>">2 <?=$d->jawaban_b ?></label>
+                                                </div>
+                                            </td>
+                                            <td> 
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_c" value="c" required>
+                                                    <label class="form-check-label mx-4" for="option_<?=$d->no_soal?>">3 <?=$d->jawaban_c ?></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_d" value="d" required>
+                                                    <label class="form-check-label mx-4" for="option_<?=$d->no_soal?>">4 <?=$d->jawaban_d ?></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="radio" name="option_<?=$d->no_soal?>" id="jawaban_e" value="e" required>
+                                                    <label class="form-check-label mx-4" for="option_<?=$d->no_soal?>">5 <?=$d->jawaban_e ?></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table><br>                    
                                     <input type="hidden" name="id_soal" value="<?= $d->id_soal?>">
                                     <input type="hidden" name="nis_nip" value="<?= $this->session->userdata("nis_nip");?>">
                                     <input type="hidden" name="id" value="<?= $d->id?>">

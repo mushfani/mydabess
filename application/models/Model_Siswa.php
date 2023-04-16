@@ -52,6 +52,11 @@ class Model_Siswa extends CI_Model
         return $tambah;
     }
 
+    public function tambahdata_nilai_problem($data){
+        $tambah = $this->db->insert('tb_hasil_problem',$data);
+        return $tambah;
+    }
+
     public function tampil_data_recall_by_id($id_recall)
 	{
 		$this->db->select("*");
@@ -95,7 +100,7 @@ class Model_Siswa extends CI_Model
         $this->db->join('tb_hasil_recall', 'tb_hasil_recall.id_recall=tb_recall.id_recall');
         $this->db->join('tb_akun', 'tb_akun.nis_nip=tb_hasil_recall.nis_nip');
         $this->db->order_by('skor_total',  'DESC');
-        $this->db->limit(3);
+        $this->db->limit(5);
         $query = $this->db->get();
         return $query->result();
     }
@@ -107,7 +112,7 @@ class Model_Siswa extends CI_Model
         $this->db->join('tb_hasil_formatif', 'tb_hasil_formatif.id_formatif=tb_formatif.id_formatif');
         $this->db->join('tb_akun', 'tb_akun.nis_nip=tb_hasil_formatif.nis_nip');
         $this->db->order_by('skor_total',  'DESC');
-        $this->db->limit(3);
+        $this->db->limit(5);
         $query = $this->db->get();
         return $query->result();
     }
@@ -119,7 +124,7 @@ class Model_Siswa extends CI_Model
         $this->db->join('tb_hasil_evaluasi', 'tb_hasil_evaluasi.id_evaluasi=tb_evaluasi_materi.id_evaluasi');
         $this->db->join('tb_akun', 'tb_akun.nis_nip=tb_hasil_evaluasi.nis_nip');
         $this->db->order_by('skor_total',  'DESC');
-        $this->db->limit(3);
+        $this->db->limit(5);
         $query = $this->db->get();
         return $query->result();
     }
@@ -215,6 +220,15 @@ class Model_Siswa extends CI_Model
         return $query->result();
     }
 
+    public function join_problem() {
+        $this->db->select('tb_problem_session.kode_materi, tb_problem_session.real_time, 
+        tb_materi.kode_materi, tb_materi.judul')->where("tb_problem_session.nis_nip", $this->session->userdata('nis_nip'));
+        $this->db->from('tb_materi');
+        $this->db->join('tb_problem_session','tb_problem_session.kode_materi=tb_materi.kode_materi');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function getChartData($nis_nip) {
         $query = $this->db->select('tb_akun.nama_akun, tb_hasil_evaluasi.skor_total as evaluasi_score, tb_hasil_recall.skor_total as recall_score, tb_hasil_formatif.skor_total as formatif_score')
             ->from('tb_akun')
@@ -240,18 +254,24 @@ class Model_Siswa extends CI_Model
     
             $evaluasi_result = $this->db->select('tb_evaluasi_materi.id_evaluasi')->from('tb_evaluasi_materi')->where("kode_materi = '{$dataItem->kode_materi}'")->get()->result();
             $id_evaluasi = !empty($evaluasi_result) ? $evaluasi_result[0]->id_evaluasi : null;
-    
-            if ($id_recall !== null && $id_evaluasi !== null) {
+
+            $formatif_result = $this->db->select('tb_formatif.id_formatif')->from('tb_formatif')->where("kode_materi = '{$dataItem->kode_materi}'")->get()->result();
+            $id_formatif = !empty($formatif_result) ? $formatif_result[0]->id_formatif : null;
+
+            if ($id_recall !== null && $id_evaluasi !== null && $id_formatif !== null) {
                 $recall_score_result = $this->db->select('skor_total')->from('tb_hasil_recall')->where("tb_hasil_recall.id_recall = '{$id_recall}'")->where("nis_nip = '{$nis_nip}'")->get()->result_array();
                 $recall_score = !empty($recall_score_result) ? $recall_score_result[0]["skor_total"] : 0;
     
                 $evaluasi_score_result = $this->db->select('skor_total')->from('tb_hasil_evaluasi')->where("tb_hasil_evaluasi.id_evaluasi = '{$id_evaluasi}'")->where("nis_nip = '{$nis_nip}'")->get()->result_array();
                 $evaluasi_score = !empty($evaluasi_score_result) ? $evaluasi_score_result[0]["skor_total"] : 0;
-    
+
+                $formatif_score_result = $this->db->select('skor_total')->from('tb_hasil_formatif')->where("tb_hasil_formatif.id_formatif = '{$id_formatif}'")->where("nis_nip = '{$nis_nip}'")->get()->result_array();
+                $formatif_score = !empty($formatif_score_result) ? $formatif_score_result[0]["skor_total"] : 0;
                 $dataMateri = array(
                     $dataItem->judul,
                     $recall_score,
-                    $evaluasi_score
+                    $evaluasi_score,
+                    $formatif_score
                 );
                 array_push($data, $dataMateri);
             }

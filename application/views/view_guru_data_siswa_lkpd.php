@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-lg-12">
             <div class="card-body">
-              <h5 class="card-title">Data Siswa <?= isset($datasiswa[0]->nama_akun) ? $datasiswa[0]->nama_akun : ''?> Hasil LKPD</h5>
+              <h5 class="card-title" >Data Siswa <?= isset($datasiswa[0]->nama_akun) ? $datasiswa[0]->nama_akun : ''?> Hasil LKPD</h5>
               <p>Ini adalah daftar hasil skor LKPD siswa yang tersedia dalam pembelajaran anda</p>
               <!-- Table with stripped rows -->
               <table class="table datatable">
